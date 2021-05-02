@@ -180,4 +180,4 @@ if __name__ == "__main__":
             raise FileNotFoundError('user file not exists')
         users = user.Users.from_file(args.user_file)
 
-    app.run()
+    app.run(host='0.0.0.0')
