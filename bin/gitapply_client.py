@@ -79,5 +79,5 @@ if __name__ == "__main__":
         prog.print_help()
         sys.exit(1)
 
-    main(args.base_url, args.repository, args.remote_repository)
+    main(args.server, args.repository, args.remote_repository)
 
