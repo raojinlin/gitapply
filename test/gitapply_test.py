@@ -2,6 +2,7 @@ import unittest
 import subprocess
 import os
 import shutil
+import sys
 
 from gitapply.client import git_status, GitFileModeModify, GitFileModeNew, read_file
 from gitapply import git, server
@@ -119,8 +120,12 @@ class ClientTest(unittest.TestCase):
         self._copy_new_file_to_server('abd')
         self._copy_new_file_to_server('ac')
 
-        py1md5 = subprocess.run(['md5sum', os.path.join(TEST_GIT_PROJECT_PATH, 'py.png')], stdout=subprocess.PIPE).stdout.decode('utf8')
-        py2md5 = subprocess.run(['md5sum', os.path.join(TEST_GIT_PROJECT_SERVER_PATH, 'py.png')], stdout=subprocess.PIPE).stdout.decode('utf8')
+        md5_command = 'md5sum'
+        if sys.platform == 'darwin':
+            md5_command = 'md5'
+
+        py1md5 = subprocess.run([md5_command, os.path.join(TEST_GIT_PROJECT_PATH, 'py.png')], stdout=subprocess.PIPE).stdout.decode('utf8')
+        py2md5 = subprocess.run([md5_command, os.path.join(TEST_GIT_PROJECT_SERVER_PATH, 'py.png')], stdout=subprocess.PIPE).stdout.decode('utf8')
 
         self.assertEqual(py1md5.split(' ')[0], py2md5.split(' ')[0])
 

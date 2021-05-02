@@ -16,7 +16,8 @@ $ ./bin/gitapply_client.py\
 ```
 $ ./bin/gitapply_server.py\
   --repository-map test:/tmp/gittest_server\
-  --repository-map test2:/tmp/gittest_server2
+  --repository-map test2:/tmp/gittest_server2\
+  --user-file ../users-example
 ```
 
 * 服务端HTTP API
@@ -30,7 +31,17 @@ $ ./bin/gitapply_server.py\
   * 200: 正常
   * 400: 参数错误
   * 500: 内部错误
+  
+* 用户认证
 
+用户文件
+
+用户名:密码:是否启用
+```text
+user1:123456:1
+user2:xxxx:0
+user3:xxxxxx:1
+```
 
 ### newRequest
 
